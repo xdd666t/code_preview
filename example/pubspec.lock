@@ -33,6 +33,13 @@ packages:
       url: "https://mirrors.tuna.tsinghua.edu.cn/dart-pub/"
     source: hosted
     version: "1.1.1"
+  code_preview:
+    dependency: "direct main"
+    description:
+      path: ".."
+      relative: true
+    source: path
+    version: "0.0.1"
   collection:
     dependency: transitive
     description:
@@ -186,3 +193,4 @@ packages:
     version: "2.1.4"
 sdks:
   dart: ">=2.19.4 <3.0.0"
+  flutter: ">=1.17.0"
