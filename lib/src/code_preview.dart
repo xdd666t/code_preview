@@ -20,7 +20,7 @@ class CodePreview extends StatelessWidget {
     return ChangeNotifierEasy(
       create: (_) => CodePreviewLogic(code: code),
       builder: (BuildContext context) {
-        var easy = Easy.of<CodePreviewLogic>(context);
+        var logic = Easy.of<CodePreviewLogic>(context);
 
         return EasyBuilder<CodePreviewLogic>(() {
           return Container(
@@ -32,7 +32,7 @@ class CodePreview extends StatelessWidget {
             child: RichText(
               text: TextSpan(
                 style: const TextStyle(fontSize: 16),
-                children: [DartSyntaxHighlighter().format(easy.codeContent)],
+                children: [DartSyntaxHighlighter().format(logic.codeContent)],
               ),
             ),
           );
