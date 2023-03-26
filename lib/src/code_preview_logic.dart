@@ -56,9 +56,9 @@ class CodePreviewLogic extends ChangeNotifier {
     final List<String> assetFilePaths = [];
     final manifestContent = await rootBundle.loadString('AssetManifest.json');
     final Map<String, dynamic> manifestMap = jsonDecode(manifestContent);
-    const folderPrefix = 'lib/';
+    const suffix = '.dart';
     for (String filePath in manifestMap.keys) {
-      if (filePath.startsWith(folderPrefix)) {
+      if (filePath.endsWith(suffix)) {
         assetFilePaths.add(filePath);
       }
     }
