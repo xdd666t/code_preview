@@ -3,7 +3,8 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:string_scanner/string_scanner.dart';
+
+import 'string_scanner/string_scanner.dart';
 
 class SyntaxHighlighterStyle {
   SyntaxHighlighterStyle({

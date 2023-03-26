@@ -1,4 +1,4 @@
-import 'package:code_preview/src/helper/syntax_highlighter.dart';
+import 'package:code_preview/src/helper/code_highlight/syntax_highlighter.dart';
 import 'package:code_preview/src/state_manage/build.dart';
 import 'package:flutter/material.dart';
 
