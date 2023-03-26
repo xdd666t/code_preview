@@ -1,7 +1,4 @@
 library code_preview;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'src/config.dart';
+export 'src/code_preview.dart';
