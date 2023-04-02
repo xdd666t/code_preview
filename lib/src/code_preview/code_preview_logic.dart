@@ -1,17 +1,26 @@
+import 'dart:async';
 import 'dart:convert';
 
+import 'package:code_preview/src/code_preview/code_preview_state.dart';
 import 'package:code_preview/src/util/code_utils.dart';
 import 'package:code_preview/src/util/view_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../code_preview.dart';
+
 class CodePreviewLogic extends ChangeNotifier {
-  Object code;
-  String codeContent = '';
+  final CodePreviewState state = CodePreviewState();
 
   CodePreviewLogic({
-    required this.code,
+    required Object code,
+    required CodeBuilder? codeBuilder,
   }) {
+    state.code = code;
+    state.codeBuilder = codeBuilder;
+  }
+
+  void onInit() {
     ViewUtils.addSafeUse(() async {
       // 处理逻辑
       var assetFilePaths = await _getAssetFilePaths();
@@ -20,9 +29,22 @@ class CodePreviewLogic extends ChangeNotifier {
     });
   }
 
+  void onCopy() {
+    state.copyTimer?.cancel();
+    state.copyTimer = Timer(const Duration(seconds: 5), () {
+      state.copyStatus = CopyStatus.not;
+      notifyListeners();
+    });
+
+    state.copyStatus = CopyStatus.done;
+    notifyListeners();
+
+    Clipboard.setData(ClipboardData(text: state.codeContent));
+  }
+
   void _matchContent(List<String> assetFilePaths) async {
-    var type = code.runtimeType.toString();
-    codeContent = '';
+    var type = state.code.runtimeType.toString();
+    String codeContent = '';
     // 尝试进行文件名匹配
     final fileName = CodeUtils.toUnderline(type);
     for (String path in assetFilePaths) {
@@ -49,6 +71,8 @@ class CodePreviewLogic extends ChangeNotifier {
     if (codeContent == '') {
       return;
     }
+    state.codeBuilder?.call(codeContent);
+    state.codeContent = codeContent;
     notifyListeners();
   }
 

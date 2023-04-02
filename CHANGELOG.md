@@ -1,8 +1,7 @@
-## 0.0.2
+## 0.0.x
 
-* 初步能用
+* preliminary use
+* improve some functions
 
 
-## 0.0.1
 
-* TODO: Describe initial release.
