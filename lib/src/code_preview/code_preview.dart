@@ -1,5 +1,6 @@
 import 'package:code_preview/src/code_preview/code_preview_state.dart';
 import 'package:code_preview/src/helper/code_highlight/syntax_highlighter.dart';
+import 'package:code_preview/src/state_manage/easy.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +10,9 @@ import '../state_manage/change_notifier_easy.dart';
 import 'code_preview_logic.dart';
 
 part 'widget/cp_bg.dart';
+
 part 'widget/cp_code.dart';
+
 part 'widget/cp_top_info.dart';
 
 typedef CustomBuilder = Widget Function(CustomParam? param);
@@ -22,6 +25,8 @@ class CodePreview extends StatelessWidget {
     this.codeBuilder,
     this.customBuilder,
   }) : super(key: key);
+
+  static CodePreviewConing coning = CodePreviewConing();
 
   /// 传入你需要预览展示的实例, eg | code: CodePreview()
   final Object code;

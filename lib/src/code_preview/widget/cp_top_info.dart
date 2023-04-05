@@ -13,9 +13,16 @@ class _CpTopInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var config = CodePreview.coning;
+    var background = config.codeTheme == CodeTheme.light
+        ? Colors.grey.withOpacity(0.20)
+        : const Color(0xFF343541);
+    var textColor =
+        config.codeTheme == CodeTheme.light ? Colors.black : Colors.white;
+
     return Container(
       height: 36,
-      color: const Color(0xFF343541),
+      color: background,
       alignment: Alignment.centerRight,
       child: InkWell(
         onTap: () => onCopy(),
@@ -30,12 +37,12 @@ class _CpTopInfo extends StatelessWidget {
                 icons = Icons.done;
               }
 
-              return Icon(icons, color: Colors.white, size: 16);
+              return Icon(icons, color: textColor, size: 16);
             }),
             const SizedBox(width: 10),
             Text(
               data.copyStatus == CopyStatus.not ? 'Copy code' : "Copied",
-              style: const TextStyle(color: Colors.white, fontSize: 14),
+              style: TextStyle(color: textColor, fontSize: 14),
             ),
           ]),
         ),

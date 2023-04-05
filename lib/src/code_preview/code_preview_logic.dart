@@ -11,7 +11,7 @@ import '../../code_preview.dart';
 import '../util/code_reg.dart';
 
 class CodePreviewLogic extends ChangeNotifier {
-  final CodePreviewState state = CodePreviewState();
+  CodePreviewState state = CodePreviewState();
 
   CodePreviewLogic({
     required Object code,
@@ -22,6 +22,10 @@ class CodePreviewLogic extends ChangeNotifier {
   }
 
   void onInit() {
+    processCode();
+  }
+
+  void processCode() {
     ViewUtils.addSafeUse(() async {
       // 处理逻辑
       var assetFilePaths = await _getAssetFilePaths();

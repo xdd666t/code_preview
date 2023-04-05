@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'change_notifier_easy.dart';
 
 class Easy {
+  Easy._();
+
   /// 获取EasyP实例
   /// 获取实例的时候,listener参数老是写错,这边直接用俩个方法区分了
   static T of<T extends ChangeNotifier>(BuildContext context) {

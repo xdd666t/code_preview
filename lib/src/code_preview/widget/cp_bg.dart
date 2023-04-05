@@ -19,6 +19,8 @@ class _CpBg extends StatefulWidget {
 }
 
 class _CpBgState extends State<_CpBg> {
+  BuildContext? _context;
+
   @override
   void initState() {
     widget.logic.onInit();
@@ -26,10 +28,26 @@ class _CpBgState extends State<_CpBg> {
   }
 
   @override
+  void didUpdateWidget(covariant _CpBg oldWidget) {
+    if (_context == null) {
+      return;
+    }
+
+    var logic = Easy.of<CodePreviewLogic>(_context!);
+    var curState = widget.logic.state;
+    if (logic.state.code != curState.code) {
+      logic.state = curState;
+      logic.processCode();
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ChangeNotifierEasy(
       create: (_) => widget.logic,
       builder: (BuildContext context) {
+        _context = context;
         return EasyBuilder<CodePreviewLogic>(builder: (logic) {
           if (widget.customBuilder != null) {
             return widget.customBuilder!(logic.state.customParam);
@@ -38,11 +56,8 @@ class _CpBgState extends State<_CpBg> {
           return ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: Container(
-              color: Colors.black,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: widget.builder(logic),
-              ),
+              color: Colors.white,
+              child: Stack(children: widget.builder(logic)),
             ),
           );
         });
