@@ -16,7 +16,12 @@ class _CpCode extends StatelessWidget {
           color: config.codeTheme == CodeTheme.light
               ? Colors.grey.withOpacity(0.1)
               : Colors.black,
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+          padding: const EdgeInsets.only(
+            left: 10,
+            right: 20,
+            top: 15,
+            bottom: 15,
+          ),
           alignment: Alignment.centerLeft,
           child: SelectionArea(
             selectionControls: CupertinoTextSelectionControls(),
