@@ -32,7 +32,7 @@ class _CpBgState extends State<_CpBg> {
       builder: (BuildContext context) {
         return EasyBuilder<CodePreviewLogic>(builder: (logic) {
           if (widget.customBuilder != null) {
-            return widget.customBuilder!(logic.state.codeContent);
+            return widget.customBuilder!(logic.state.customParam);
           }
 
           return ClipRRect(

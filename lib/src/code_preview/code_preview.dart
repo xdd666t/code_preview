@@ -3,6 +3,7 @@ import 'package:code_preview/src/helper/code_highlight/syntax_highlighter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../code_preview.dart';
 import '../state_manage/build.dart';
 import '../state_manage/change_notifier_easy.dart';
 import 'code_preview_logic.dart';
@@ -11,7 +12,7 @@ part 'widget/cp_bg.dart';
 part 'widget/cp_code.dart';
 part 'widget/cp_top_info.dart';
 
-typedef CustomBuilder = Widget Function(String codeContent);
+typedef CustomBuilder = Widget Function(CustomParam? param);
 typedef CodeBuilder = void Function(String codeContent);
 
 class CodePreview extends StatelessWidget {

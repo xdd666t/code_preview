@@ -2,6 +2,8 @@ import 'package:code_preview/code_preview.dart';
 import 'package:example/widgets/test_widget.dart';
 import 'package:flutter/material.dart';
 
+import 'widgets/one_widget.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -49,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Container(
                 margin: const EdgeInsets.all(30),
                 child: CodePreview(
-                  code: this,
+                  code: const OneWidget(),
                   codeBuilder: (code) {
                     print(code);
                   },

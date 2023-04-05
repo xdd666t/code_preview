@@ -2,12 +2,13 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:code_preview/src/code_preview/code_preview_state.dart';
-import 'package:code_preview/src/util/code_utils.dart';
+import 'package:code_preview/src/util/code_kit.dart';
 import 'package:code_preview/src/util/view_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../code_preview.dart';
+import '../util/code_reg.dart';
 
 class CodePreviewLogic extends ChangeNotifier {
   final CodePreviewState state = CodePreviewState();
@@ -45,14 +46,16 @@ class CodePreviewLogic extends ChangeNotifier {
   void _matchContent(List<String> assetFilePaths) async {
     var type = state.code.runtimeType.toString();
     String codeContent = '';
+    String correctPath = '';
     // 尝试进行文件名匹配
-    final fileName = CodeUtils.toUnderline(type);
+    final fileName = CodeKit.toUnderline(type);
     for (String path in assetFilePaths) {
       if (path.endsWith('/$fileName.dart')) {
         final allContent = await rootBundle.loadString(path);
-        var isMatch = CodeUtils.matchType(allContent, type);
+        var isMatch = CodeReg.matchType(allContent, type);
         if (isMatch) {
           codeContent = allContent;
+          correctPath = path;
           break;
         }
       }
@@ -61,9 +64,10 @@ class CodePreviewLogic extends ChangeNotifier {
     if (codeContent == '') {
       for (String path in assetFilePaths) {
         final allContent = await rootBundle.loadString(path);
-        var isMatch = CodeUtils.matchType(allContent, type);
+        var isMatch = CodeReg.matchType(allContent, type);
         if (isMatch) {
           codeContent = allContent;
+          correctPath = path;
           break;
         }
       }
@@ -73,6 +77,13 @@ class CodePreviewLogic extends ChangeNotifier {
     }
     state.codeBuilder?.call(codeContent);
     state.codeContent = codeContent;
+    state.customParam = CustomParam(
+      codeContent: CodeReg.removeComment(codeContent),
+      codeFileName: CodeReg.pathToFileName(correctPath),
+      codePath: correctPath,
+      parseParam: CodeReg.parseParam(codeContent),
+    );
+
     notifyListeners();
   }
 

@@ -12,6 +12,8 @@ class CodePreviewState {
   CopyStatus copyStatus = CopyStatus.not;
 
   Timer? copyTimer;
+
+  CustomParam? customParam;
 }
 
 enum CopyStatus {
