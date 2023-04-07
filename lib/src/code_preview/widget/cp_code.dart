@@ -10,7 +10,7 @@ class _CpCode extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(top: 36),
       child: LayoutBuilder(builder: (_, constraint) {
-        var config = CodePreview.coning;
+        var config = CodePreview.config;
 
         var codeShow = Container(
           color: config.codeTheme == CodeTheme.light
@@ -31,6 +31,7 @@ class _CpCode extends StatelessWidget {
                   fontSize: 16,
                   height: 1.5,
                   color: Colors.white,
+                  letterSpacing: 1,
                 ),
                 children: [
                   DartSyntaxHighlighter(

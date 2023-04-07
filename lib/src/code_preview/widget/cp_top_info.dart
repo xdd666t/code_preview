@@ -13,7 +13,7 @@ class _CpTopInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var config = CodePreview.coning;
+    var config = CodePreview.config;
     var background = config.codeTheme == CodeTheme.light
         ? Colors.grey.withOpacity(0.20)
         : const Color(0xFF343541);

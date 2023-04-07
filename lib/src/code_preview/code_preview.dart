@@ -15,7 +15,7 @@ part 'widget/cp_code.dart';
 
 part 'widget/cp_top_info.dart';
 
-typedef CustomBuilder = Widget Function(CustomParam? param);
+typedef CustomBuilder = Widget Function(Widget codeWidget, CustomParam? param);
 typedef CodeBuilder = void Function(String codeContent);
 
 class CodePreview extends StatelessWidget {
@@ -26,7 +26,7 @@ class CodePreview extends StatelessWidget {
     this.customBuilder,
   }) : super(key: key);
 
-  static CodePreviewConing coning = CodePreviewConing();
+  static CodePreviewConfig config = CodePreviewConfig();
 
   /// 传入你需要预览展示的实例, eg | code: CodePreview()
   final Object code;

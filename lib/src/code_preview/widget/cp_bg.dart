@@ -47,19 +47,21 @@ class _CpBgState extends State<_CpBg> {
     return ChangeNotifierEasy(
       create: (_) => widget.logic,
       builder: (BuildContext context) {
-        _context = context;
         return EasyBuilder<CodePreviewLogic>(builder: (logic) {
-          if (widget.customBuilder != null) {
-            return widget.customBuilder!(logic.state.customParam);
-          }
-
-          return ClipRRect(
+          _context = context;
+          var codeWidget = ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: Container(
               color: Colors.white,
               child: Stack(children: widget.builder(logic)),
             ),
           );
+
+          if (widget.customBuilder != null) {
+            return widget.customBuilder!(codeWidget, logic.state.customParam);
+          }
+
+          return codeWidget;
         });
       },
     );

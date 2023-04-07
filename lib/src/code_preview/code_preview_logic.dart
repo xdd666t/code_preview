@@ -79,13 +79,20 @@ class CodePreviewLogic extends ChangeNotifier {
     if (codeContent == '') {
       return;
     }
+
+    Map<String, String> parseParam = CodeReg.parseParam(codeContent);
+    // 处理是否需要去掉注释
+    if (CodePreview.config.removeParseComment) {
+      codeContent = CodeReg.removeComment(codeContent);
+    }
+
     state.codeBuilder?.call(codeContent);
     state.codeContent = codeContent;
     state.customParam = CustomParam(
-      codeContent: CodeReg.removeComment(codeContent),
+      codeContent: codeContent,
       codeFileName: CodeReg.pathToFileName(correctPath),
       codePath: correctPath,
-      parseParam: CodeReg.parseParam(codeContent),
+      parseParam: parseParam,
     );
 
     notifyListeners();
