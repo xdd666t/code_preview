@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Container(
                 margin: const EdgeInsets.all(30),
                 child: CodePreview(
-                  code: const OneWidget(),
+                  className: "OneWidget",
                   codeBuilder: (code) {
                     print(code);
                   },

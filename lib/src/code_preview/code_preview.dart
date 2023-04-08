@@ -21,15 +21,15 @@ typedef CodeBuilder = void Function(String codeContent);
 class CodePreview extends StatelessWidget {
   const CodePreview({
     Key? key,
-    required this.code,
+    required this.className,
     this.codeBuilder,
     this.customBuilder,
   }) : super(key: key);
 
   static CodePreviewConfig config = CodePreviewConfig();
 
-  /// 传入你需要预览展示的实例, eg | code: CodePreview()
-  final Object code;
+  /// 传入你需要预览展示的类名, eg | code: "CodePreview"
+  final String className;
 
   /// 当code内容计算出来后, 该回调会被调用
   final CodeBuilder? codeBuilder;
@@ -40,7 +40,7 @@ class CodePreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _CpBg(
-      logic: CodePreviewLogic(code: code, codeBuilder: codeBuilder),
+      logic: CodePreviewLogic(className: className, codeBuilder: codeBuilder),
       customBuilder: customBuilder,
       builder: (CodePreviewLogic logic) => [
         // 顶部功能区

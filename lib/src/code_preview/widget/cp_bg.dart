@@ -35,7 +35,7 @@ class _CpBgState extends State<_CpBg> {
 
     var logic = Easy.of<CodePreviewLogic>(_context!);
     var curState = widget.logic.state;
-    if (logic.state.code != curState.code) {
+    if (logic.state.className != curState.className) {
       logic.state = curState;
       logic.processCode();
     }

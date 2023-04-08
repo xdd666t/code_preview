@@ -29,9 +29,9 @@ class _CpCode extends StatelessWidget {
               TextSpan(
                 style: const TextStyle(
                   fontSize: 16,
-                  height: 1.5,
+                  height: 1.39,
                   color: Colors.white,
-                  letterSpacing: 1,
+                  letterSpacing: 0.8,
                 ),
                 children: [
                   DartSyntaxHighlighter(

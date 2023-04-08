@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:code_preview/src/code_preview/code_preview_state.dart';
 import 'package:code_preview/src/util/code_kit.dart';
 import 'package:code_preview/src/util/view_utils.dart';
@@ -14,10 +13,10 @@ class CodePreviewLogic extends ChangeNotifier {
   CodePreviewState state = CodePreviewState();
 
   CodePreviewLogic({
-    required Object code,
+    required String className,
     required CodeBuilder? codeBuilder,
   }) {
-    state.code = code;
+    state.className = className;
     state.codeBuilder = codeBuilder;
   }
 
@@ -48,7 +47,8 @@ class CodePreviewLogic extends ChangeNotifier {
   }
 
   void _matchContent(List<String> assetFilePaths) async {
-    var type = state.code.runtimeType.toString();
+    var type = state.className;
+
     String codeContent = '';
     String correctPath = '';
     // 尝试进行文件名匹配
@@ -64,6 +64,7 @@ class CodePreviewLogic extends ChangeNotifier {
         }
       }
     }
+
     // 如果文件名没匹配上, 则进行全量匹配
     if (codeContent == '') {
       for (String path in assetFilePaths) {
@@ -76,6 +77,7 @@ class CodePreviewLogic extends ChangeNotifier {
         }
       }
     }
+
     if (codeContent == '') {
       return;
     }

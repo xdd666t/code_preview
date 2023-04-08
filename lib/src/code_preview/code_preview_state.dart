@@ -3,7 +3,7 @@ import 'dart:async';
 import '../../code_preview.dart';
 
 class CodePreviewState {
-  late Object code;
+  late String className;
 
   String codeContent = '';
 
