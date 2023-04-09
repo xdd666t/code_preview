@@ -7,6 +7,9 @@ class CodePreviewState {
 
   String codeContent = '';
 
+
+  bool loadingCode = false;
+
   CodeBuilder? codeBuilder;
 
   CopyStatus copyStatus = CopyStatus.not;

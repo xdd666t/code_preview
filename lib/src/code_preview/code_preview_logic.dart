@@ -26,11 +26,18 @@ class CodePreviewLogic extends ChangeNotifier {
 
   void processCode() {
     ViewUtils.addSafeUse(() async {
+      loadingCode(true);
       // 处理逻辑
       var assetFilePaths = await _getAssetFilePaths();
       // 匹配内容
-      _matchContent(assetFilePaths);
+      await _matchContent(assetFilePaths);
+      loadingCode(false);
     });
+  }
+
+  void loadingCode(bool loading) {
+    state.loadingCode = loading;
+    notifyListeners();
   }
 
   void onCopy() {
@@ -46,7 +53,7 @@ class CodePreviewLogic extends ChangeNotifier {
     Clipboard.setData(ClipboardData(text: state.codeContent));
   }
 
-  void _matchContent(List<String> assetFilePaths) async {
+  Future<void> _matchContent(List<String> assetFilePaths) async {
     var type = state.className;
 
     String codeContent = '';

@@ -1,6 +1,6 @@
 name: code_preview
 description: flutter code preview
-version: 0.0.9
+version: 0.1.0
 homepage: https://github.com/xdd666t/code_preview
 # export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890
 # flutter pub publish --server=https://pub.dartlang.org
