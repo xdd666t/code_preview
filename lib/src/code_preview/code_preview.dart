@@ -28,7 +28,9 @@ class CodePreview extends StatelessWidget {
 
   static CodePreviewConfig config = CodePreviewConfig();
 
-  /// 传入你需要预览展示的类名, eg | code: "CodePreview"
+  /// 传入你需要预览展示的类名, eg | className: "CodePreview"
+  ///
+  /// 谨慎使用: xxx.runtimeType.toString(), Flutter web release模式下类型名会被压缩
   final String className;
 
   /// 当code内容计算出来后, 该回调会被调用
@@ -39,6 +41,7 @@ class CodePreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return _CpBg(
       logic: CodePreviewLogic(className: className, codeBuilder: codeBuilder),
       customBuilder: customBuilder,
