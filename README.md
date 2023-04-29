@@ -22,7 +22,7 @@ class Test extends StatelessWidget {
 
 ![image-20230429215042820](https://raw.githubusercontent.com/xdd666t/MyData/master/pic/flutter/blog/202304292234052.png)
 
-## Configuration code file
+# Configuration code file
 
 Because the principle is to traverse resource files, the code file or its folder path that needs to be displayed must be defined under assets. This step provides an automated plug-in solution for everyone
 
