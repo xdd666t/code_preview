@@ -5,7 +5,7 @@ enum CodeTheme {
 
 class CodePreviewConfig {
   CodePreviewConfig({
-    this.codeTheme = CodeTheme.light,
+    this.codeTheme = CodeTheme.dark,
     this.removeParseComment = true,
   });
 
