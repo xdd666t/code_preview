@@ -89,7 +89,7 @@ class CodePreviewLogic extends ChangeNotifier {
       return;
     }
 
-    Map<String, String> parseParam = CodeReg.parseParam(codeContent);
+    Map<String, List<String>> parseParam = CodeReg.parseParam(codeContent);
     // 处理是否需要去掉注释
     if (CodePreview.config.removeParseComment) {
       codeContent = CodeReg.removeComment(codeContent);

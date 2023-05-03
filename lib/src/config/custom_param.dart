@@ -21,7 +21,10 @@ class CustomParam {
   /// 可解析下述的title,***及其后面的内容, *** 非固定内容, 可随意命名
   /// 使用: parseParam['title'], 或者 parseParam['***']
   ///
-  /// /// title: test one
+  /// /// title:
+  /// ///   - test title one
+  /// ///   - test title two
+  /// /// content: test content
   /// /// ***: test one
   /// class OneWidget extends StatelessWidget {
   ///   const OneWidget({Key? key}) : super(key: key);
@@ -31,5 +34,5 @@ class CustomParam {
   ///     return const Placeholder();
   ///   }
   /// }
-  final Map<String, String> parseParam;
+  final Map<String, List<String>> parseParam;
 }

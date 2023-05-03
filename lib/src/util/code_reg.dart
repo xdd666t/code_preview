@@ -13,16 +13,39 @@ class CodeReg {
     return filename ?? '';
   }
 
-  static Map<String, String> parseParam(String codeContent) {
-    RegExp exp = RegExp(r"///\s*(\S+)[\s,:.：。]+(.+)");
+  static Map<String, List<String>> parseParam(String codeContent) {
+//     RegExp regex = RegExp(r'''///\s*(?<key>.[^-]+)[:：]+\s*
+// (?<value>(?:(?:-\s*)?[^\n]+\n)+)(?:(?!///|class).)*''', multiLine: true, dotAll: true);
+    RegExp regex = RegExp(r"///\s*(?<key>\S+)[\s,:.：。]+(?<value>.+)");
 
-    Iterable<Match> matches = exp.allMatches(codeContent);
-    Map<String, String> map = {};
-    for (Match match in matches) {
-      String? key = match.group(1);
-      String? value = match.group(2);
-      map[key ?? ''] = value ?? '';
+    Iterable<RegExpMatch> matches = regex.allMatches(codeContent);
+    Map<String, List<String>> map = {};
+    for (RegExpMatch match in matches) {
+      // 对key相关处理
+      String key = match.namedGroup('key') ?? '';
+      key = key.replaceAll(',', '');
+      key = key.replaceAll(':', '');
+      key = key.replaceAll('：', '');
+      key = key.replaceAll('。', '');
+      key = key.trim();
+
+      // 对value相关处理
+      String value = match.namedGroup('value') ?? '';
+
+      // 如果 value 以 "- " 开头，则将其转换为列表
+      if (value.startsWith('-')) {
+        List<String> list = [];
+        RegExp listRegex = RegExp(r"(^\s*-?\s*)(.*)");
+        for (String line in value.split('\n')) {
+          Match listMatch = listRegex.firstMatch(line.trim()) as Match;
+          list.add(listMatch.group(2)?.trim() ?? '');
+        }
+        map[key] = list;
+      } else {
+        map[key] = [value];
+      }
     }
+
     return map;
   }
 

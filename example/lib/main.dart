@@ -52,8 +52,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 margin: const EdgeInsets.all(30),
                 child: CodePreview(
                   className: "OneWidget",
-                  codeBuilder: (code) {
-                    print(code);
+                  customBuilder: (Widget codeWidget, CustomParam? param) {
+                    debugPrint(param?.parseParam['title'].toString());
+                    debugPrint(param?.parseParam['content'].toString());
+                    debugPrint(param?.parseParam['description'].toString());
+                    return codeWidget;
                   },
                 ),
               ),

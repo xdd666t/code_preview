@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-/// title: test one
-/// content test one
-/// description  测试, 测试
+/// title: test title one
+/// content: test content
+/// description: 测试, 测试
 class OneWidget extends StatelessWidget {
   const OneWidget({Key? key}) : super(key: key);
 
