@@ -18,14 +18,16 @@ class CustomParam {
   /// 解析代码的map参数集
   ///
   /// eg:
-  /// 可解析下述的title,***及其后面的内容, *** 非固定内容, 可随意命名
+  /// key的前面必须加@,eg(@title, @***)
+  /// key与value的之间,必须使用分号分割,eg(@***:*******)
+  /// value如果需要换行,换行的文案前必须中划线
   /// 使用: parseParam['title'], 或者 parseParam['***']
   ///
-  /// /// title:
-  /// ///   - test title one
-  /// ///   - test title two
-  /// /// content: test content
-  /// /// ***: test one
+  /// /// @title:
+  /// ///  - test title one
+  /// ///  - test title two
+  /// /// @content: test content
+  /// /// @description: test description
   /// class OneWidget extends StatelessWidget {
   ///   const OneWidget({Key? key}) : super(key: key);
   ///

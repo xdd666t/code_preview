@@ -14,36 +14,29 @@ class CodeReg {
   }
 
   static Map<String, List<String>> parseParam(String codeContent) {
-//     RegExp regex = RegExp(r'''///\s*(?<key>.[^-]+)[:：]+\s*
-// (?<value>(?:(?:-\s*)?[^\n]+\n)+)(?:(?!///|class).)*''', multiLine: true, dotAll: true);
-    RegExp regex = RegExp(r"///\s*(?<key>\S+)[\s,:.：。]+(?<value>.+)");
-
+    RegExp regex = RegExp(
+      r"@(?<key>.+)[:：]+\s*(?<value>.+(?:(?!\n.*\bclass\b)[^@]*)*)",
+    );
     Iterable<RegExpMatch> matches = regex.allMatches(codeContent);
     Map<String, List<String>> map = {};
     for (RegExpMatch match in matches) {
       // 对key相关处理
-      String key = match.namedGroup('key') ?? '';
-      key = key.replaceAll(',', '');
-      key = key.replaceAll(':', '');
-      key = key.replaceAll('：', '');
-      key = key.replaceAll('。', '');
-      key = key.trim();
-
+      String key = match.namedGroup('key')?.trim() ?? '';
       // 对value相关处理
       String value = match.namedGroup('value') ?? '';
-
-      // 如果 value 以 "- " 开头，则将其转换为列表
-      if (value.startsWith('-')) {
-        List<String> list = [];
-        RegExp listRegex = RegExp(r"(^\s*-?\s*)(.*)");
-        for (String line in value.split('\n')) {
-          Match listMatch = listRegex.firstMatch(line.trim()) as Match;
-          list.add(listMatch.group(2)?.trim() ?? '');
+      value = value.replaceAll('///', '').trim();
+      value = value.replaceAll('\n', '').trim();
+      var valueList = [value];
+      if (value.contains('-')) {
+        value = value.replaceFirst('-', '').trim();
+        var list = value.split('-');
+        valueList.clear();
+        for (var element in list) {
+          valueList.add(element.trim());
         }
-        map[key] = list;
-      } else {
-        map[key] = [value];
       }
+
+      map[key] = valueList;
     }
 
     return map;

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-/// title: test title one
-/// content: test content
-/// description: 测试, 测试
+/// @title:
+///  - test title one
+///  - test title two
+/// @content: test content
+/// @description: test description
 class OneWidget extends StatelessWidget {
   const OneWidget({Key? key}) : super(key: key);
 
