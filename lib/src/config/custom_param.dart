@@ -19,7 +19,7 @@ class CustomParam {
   ///
   /// eg:
   /// key的前面必须加@,eg(@title, @***)
-  /// key与value的之间,必须使用分号分割,eg(@***:*******)
+  /// key与value的之间,必须使用分号分割,eg(@***: *******)
   /// value如果需要换行,换行的文案前必须中划线
   /// 使用: parseParam['title'], 或者 parseParam['***']
   ///
